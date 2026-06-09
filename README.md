@@ -15,6 +15,34 @@ A feature-rich Bomberman implementation built with **LibGDX**, demonstrating adv
 - **Skin/Control Customization**: Multiple character skins and dual input systems (WASD + Arrow Keys)
 - **Pause & Resume**: Full game state persistence across pause cycles 
 
+## How to Play
+
+**Objective:** Defeat all enemies and reach the exit to progress.
+
+**Controls:**
+| Action | Key |
+|--------|-----|
+| Move | Arrow Keys or WASD |
+| Place Bomb | Space |
+| Pause/Menu | Escape |
+
+**Game Flow:**
+1. Select **Voyage** (three progressive maps) or **Choose File** (custom `.properties` maps)
+2. Pick difficulty: EASY, MEDIUM, or HARD (affects time limits and enemy aggression)
+3. Optionally change character skin (Steve or Bomberman)
+4. Navigate the map: destroy walls, collect power-ups, avoid/defeat enemies
+5. Once all enemies are defeated, the exit opens (HUD indicates status)
+6. Reach the exit to win and progress to the next map (Voyage mode)
+
+**Strategy Tips:**
+- **Power-ups** are hidden under destructible walls—destroy walls to find them
+- **Enemies aggro** when you get close; stay at distance or use bombs tactically
+- **Chained explosions** from bomb blasts destroy walls and can hurt multiple enemies
+- **Speed power-ups** are rare but game-changing—seek them out
+
+**Files:**
+- Built-in maps: `maps/EasyMap.properties`, `maps/MediumMap.properties`, `maps/HardMap.properties`
+- Custom maps: Place any `.properties` file in the `maps/` directory and load via "Choose File"
 
 ## Architecture & Design
 
