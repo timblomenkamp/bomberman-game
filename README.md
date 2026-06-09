@@ -41,8 +41,8 @@ A feature-rich Bomberman implementation built with **LibGDX**, demonstrating adv
 - **Speed power-ups** are rare but game-changing—seek them out
 
 **Files:**
-- Built-in maps: `maps/EasyMap.properties`, `maps/MediumMap.properties`, `maps/HardMap.properties`
-- Custom maps: Place any `.properties` file in the `maps/` directory and load via "Choose File"
+- Built-in maps: `assets/maps/EasyMap.properties`, `assets/maps/MediumMap.properties`, `assets/maps/HardMap.properties`
+- Custom maps: Place any `.properties` file in the `assets/maps/` directory and load via "Choose File"
 
 ## Architecture & Design
 
