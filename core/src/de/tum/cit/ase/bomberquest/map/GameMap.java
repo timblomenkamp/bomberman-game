@@ -219,16 +219,41 @@ public class GameMap {
      * with refinements
      * @return hashmap wth MapKey as key and value between 0 and 6 for map creation
      */
-    public Map<MapKey, Integer> createHashMapFromFile(){
-        try {
-            com.badlogic.gdx.files.FileHandle fileHandle = passedFile.isAbsolute()
-                    ? Gdx.files.absolute(passedFile.getAbsolutePath())
-                    : Gdx.files.internal(passedFile.getPath());
-            propertiesAsString = fileHandle.readString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            propertiesAsString = null;
+    /**
+     * Robustly reads a map file's contents, trying multiple strategies so it works
+     * regardless of the working directory (Gradle run vs IDE direct launch).
+     */
+    private String readMapFile(File file) {
+        String path = file.getPath();
+        // 1) User-selected files are absolute on disk -> read directly.
+        if (file.isAbsolute() && file.exists()) {
+            try {
+                return new String(java.nio.file.Files.readAllBytes(file.toPath()));
+            } catch (Exception ignored) {}
         }
+        // 2) Bundled maps: try classpath first (works from any working directory).
+        try {
+            com.badlogic.gdx.files.FileHandle h = Gdx.files.classpath(path);
+            if (h.exists()) return h.readString();
+        } catch (Exception ignored) {}
+        // 3) Fall back to internal (relative to working directory).
+        try {
+            com.badlogic.gdx.files.FileHandle h = Gdx.files.internal(path);
+            if (h.exists()) return h.readString();
+        } catch (Exception ignored) {}
+        // 4) Last resort: try reading the raw path from disk.
+        try {
+            if (file.exists()) {
+                return new String(java.nio.file.Files.readAllBytes(file.toPath()));
+            }
+        } catch (Exception ignored) {}
+        System.err.println("Could not load map file '" + path + "'. Working directory: "
+                + System.getProperty("user.dir"));
+        return null;
+    }
+
+    public Map<MapKey, Integer> createHashMapFromFile(){
+        propertiesAsString = readMapFile(passedFile);
 
         Map<MapKey, Integer> assignmentMap = new HashMap<>();
 
