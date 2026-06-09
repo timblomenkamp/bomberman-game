@@ -41,6 +41,13 @@ public class DesktopLauncher {
 //		// Inject the DesktopFileChooser
 //		game.setFileChooser(new DesktopFileChooser(new DefaultNativeFileChooser()));
 
+		// Ensure working directory is assets/ so LibGDX can find internal files,
+		// regardless of whether the game is launched via Gradle or directly from an IDE.
+		java.io.File assetsDir = new java.io.File("assets");
+		if (assetsDir.exists() && assetsDir.isDirectory()) {
+			System.setProperty("user.dir", assetsDir.getAbsolutePath());
+		}
+
 		NativeFileChooser fileChooser = new DesktopFileChooser();
 
 		// Launch the game
