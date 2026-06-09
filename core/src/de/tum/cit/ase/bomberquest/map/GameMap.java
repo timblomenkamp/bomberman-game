@@ -220,16 +220,12 @@ public class GameMap {
      * @return hashmap wth MapKey as key and value between 0 and 6 for map creation
      */
     public Map<MapKey, Integer> createHashMapFromFile(){
-        try (BufferedReader reader = new BufferedReader(new FileReader(passedFile))){
-            StringBuilder fileContent = new StringBuilder();
-            String oneLine;
-
-            while ((oneLine = reader.readLine()) != null){
-                fileContent.append(oneLine).append("\n");
-            }
-            propertiesAsString = fileContent.toString();
-
-        } catch (IOException e) {
+        try {
+            com.badlogic.gdx.files.FileHandle fileHandle = passedFile.isAbsolute()
+                    ? Gdx.files.absolute(passedFile.getAbsolutePath())
+                    : Gdx.files.internal(passedFile.getPath());
+            propertiesAsString = fileHandle.readString();
+        } catch (Exception e) {
             e.printStackTrace();
             propertiesAsString = null;
         }
