@@ -22,6 +22,12 @@ public class DesktopLauncher {
 	 * @param arg Command line arguments (not used in this application)
 	 */
 	public static void main(String[] arg) {
+		// On macOS, LWJGL requires the JVM to run with -XstartOnFirstThread.
+		// Relaunch with that flag if needed (e.g. when started directly from an IDE).
+		if (StartupHelper.startNewJvmIfRequired()) {
+			return;
+		}
+
 		// Configuration for the game window
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setTitle("Bomber Quest"); // Set the window title
