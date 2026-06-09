@@ -136,7 +136,7 @@ public class BomberQuestGame extends Game {
      */
     public void createMap(){
         if (file == null){
-            this.map = new GameMap(this, Gdx.files.internal("EasyMap.properties").file());
+            this.map = new GameMap(this, Gdx.files.internal("maps/EasyMap.properties").file());
             map.getWorld().setContactListener(new ContactListener() {
                 @Override
                 // The contact listener recognizes the contact between different objects and can trigger methods, if a contact is recognized
