@@ -342,6 +342,9 @@ public class GameMap {
             // -> making the entrance random and binding the player's spawn location to it
             if (entrance == null) {
                 List<Map.Entry<MapKey, Integer>> entryList = new ArrayList<>(filterGround().entrySet()); //Player can only spawn at ground -> filter all ground fields out with filterGround() method
+                if (entryList.isEmpty()) {
+                    throw new IllegalArgumentException("No ground tiles available for player spawn in map");
+                }
                 int index = new Random().nextInt(entryList.size()); // picks a random index of all ground coordinates
                 Map.Entry<MapKey, Integer> randomMapKey = entryList.get(index); // gets the corresponding index
 
@@ -622,6 +625,9 @@ public class GameMap {
      * helper method to filter a random MapKey from a given Set of MapKeys
      */
     public MapKey getRandomKeyFromSet(Set<MapKey> set){
+        if (set == null || set.isEmpty()) {
+            throw new IllegalArgumentException("Cannot select random key from empty set");
+        }
         int index = new Random().nextInt(set.size());
         int currIndex = 0;
         for(MapKey key : set){
