@@ -4,6 +4,25 @@ A feature-rich Bomberman implementation built with **LibGDX**, demonstrating adv
 
 **Tech Stack:** Java, LibGDX, Gradle
 
+## Getting Started
+
+**Requirements:** Java 17 or newer (JDK).
+
+Clone the repository and launch the desktop game with the bundled Gradle wrapper:
+
+```bash
+git clone https://github.com/timblomenkamp/bomberman-game.git
+cd bomberman-game
+./gradlew desktop:run
+```
+
+On Windows, use `gradlew.bat desktop:run` instead.
+
+**Running from an IDE:** Import the project as a Gradle project, then run
+`com.timblomenkamp.bomberquest.DesktopLauncher`. On macOS the launcher
+automatically restarts the JVM with the required `-XstartOnFirstThread` flag,
+so the IDE "Run" button works out of the box.
+
 ## Gameplay
 
 **Core Mechanics:**
